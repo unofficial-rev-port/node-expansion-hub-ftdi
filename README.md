@@ -3,6 +3,8 @@
 This package enables Node.js applications to put USB-connected Expansion Hubs into firmware
 update mode.
 
+unofficial-rev-port fork to add Linux/Mac compat
+
 ## Making a release
 
 1. Check out the `main` branch
