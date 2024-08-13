@@ -5,7 +5,7 @@
       'sources': [
         'src/addon.cc',
         'src/EnterFirmwareUpdateMode.cc'
-       ],
+      ],
       'include_dirs': [
         "src/",
         "d2xx/",
@@ -17,13 +17,23 @@
       'dependencies': ["<!(node -p \"require('node-addon-api').gyp\")"],
       'link_settings': {
         "conditions": [
-          ["target_arch=='x64'", {
+          ['OS=="mac"', {
             'libraries': [
-               '-l<(module_root_dir)/d2xx/amd64/ftd2xx.lib'
+                '-framework CoreFoundation',
+                '-framework IOKit'
+            ]
+          }],
+          ['OS=="win"', {
+            'libraries': [
+                '-l<(module_root_dir)/d2xx/amd64/ftd2xx.lib'
+            ]
+          }],
+          ['OS=="linux"', {
+            'libraries': [
+                '-lftd2xx'
             ]
           }]
         ],
-
       },
       'cflags!': [ '-fno-exceptions' ],
       'cflags_cc!': [ '-fno-exceptions' ],
