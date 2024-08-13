@@ -11,12 +11,13 @@
         "url": "https://github.com/REVrobotics/node-expansion-hub-ftdi.git"
     },
     "dependencies": {
+        "@rev-robotics/expansion-hub-ftdi": "file:",
         "node-addon-api": "^6.0.0",
-        "node-gyp-build": "^4.6.0"
+        "node-gyp-build": "^4.8.0"
     },
     "devDependencies": {
         "@types/node": "^16.18.18",
-        "node-gyp": "^9.3.1",
+        "node-gyp": "^10.1.0",
         "prebuildify": "^5.0.1",
         "typescript": "^5.0.2"
     },
