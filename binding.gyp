@@ -25,12 +25,12 @@
           }],
           ['OS=="win"', {
             'libraries': [
-                '-l<(module_root_dir)/d2xx/amd64/ftd2xx.lib'
+                '-l<(module_root_dir)/d2xx/winamd64/ftd2xx.lib'
             ]
           }],
           ['OS=="linux"', {
             'libraries': [
-                '-lftd2xx'
+                '<(module_root_dir)/d2xx/linuxamd64/libftd2xx.so'
             ]
           }]
         ],
