@@ -5,7 +5,7 @@
       'sources': [
         'src/addon.cc',
         'src/EnterFirmwareUpdateMode.cc'
-       ],
+      ],
       'include_dirs': [
         "src/",
         "d2xx/",
@@ -16,14 +16,37 @@
       ],
       'dependencies': ["<!(node -p \"require('node-addon-api').gyp\")"],
       'link_settings': {
-        "conditions": [
-          ["target_arch=='x64'", {
+        'conditions': [
+          ['OS=="mac"', {
             'libraries': [
-               '-l<(module_root_dir)/d2xx/amd64/ftd2xx.lib'
-            ]
-          }]
+              '<(module_root_dir)/d2xx/darwin-osxuniversal/libftd2xx.a',
+            ],
+          }],
+          ['OS=="win"', {
+            'libraries': [
+              '<(module_root_dir)/d2xx/win32-x64/ftd2xx.lib',
+            ],
+          }],
+          ['OS=="linux"', {
+            'conditions': [
+              [ 'target_arch=="x64"', {
+                'libraries': [
+                  '<(module_root_dir)/d2xx/linux-x64/libftd2xx.so',
+                ],
+              }],
+              [ 'target_arch=="arm"', {
+                'libraries': [
+                  '<(module_root_dir)/d2xx/linux-arm32/libftd2xx.so',
+                ],
+              }],
+              [ 'target_arch=="arm64"', {
+                'libraries': [
+                  '<(module_root_dir)/d2xx/linux-arm64/libftd2xx.so',
+                ],
+              }],
+            ],
+          }],
         ],
-
       },
       'cflags!': [ '-fno-exceptions' ],
       'cflags_cc!': [ '-fno-exceptions' ],
