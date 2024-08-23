@@ -16,31 +16,36 @@
       ],
       'dependencies': ["<!(node -p \"require('node-addon-api').gyp\")"],
       'link_settings': {
-        "conditions": [
+        'conditions': [
           ['OS=="mac"', {
             'libraries': [
-                '-l<(module_root_dir)/d2xx/darwin-osxuniversal/libftd2xx.a'
-            ]
+              '<(module_root_dir)/d2xx/darwin-osxuniversal/libftd2xx.a',
+            ],
           }],
           ['OS=="win"', {
             'libraries': [
-                '-l<(module_root_dir)/d2xx/win-x64/ftd2xx.lib'
-            ]
+              '<(module_root_dir)/d2xx/win32-x64/ftd2xx.lib',
+            ],
           }],
           ['OS=="linux"', {
-            ['target_arch=="x64"', {
-              'libraries': [
-                '<(module_root_dir)/d2xx/linux-x64/libftd2xx.so'
-            ]}],
-            ['target_arch=="arm"', {
-              'libraries': [
-                '<(module_root_dir)/d2xx/linux-arm32/libftd2xx.so'
-            ]}],
-            ['target_arch=="arm64"', {
-              'libraries': [
-                '<(module_root_dir)/d2xx/linux-arm64/libftd2xx.so'
-            ]}],
-          }]
+            'conditions': [
+              [ 'target_arch=="x64"', {
+                'libraries': [
+                  '<(module_root_dir)/d2xx/linux-x64/libftd2xx.so',
+                ],
+              }],
+              [ 'target_arch=="arm"', {
+                'libraries': [
+                  '<(module_root_dir)/d2xx/linux-arm32/libftd2xx.so',
+                ],
+              }],
+              [ 'target_arch=="arm64"', {
+                'libraries': [
+                  '<(module_root_dir)/d2xx/linux-arm64/libftd2xx.so',
+                ],
+              }],
+            ],
+          }],
         ],
       },
       'cflags!': [ '-fno-exceptions' ],
