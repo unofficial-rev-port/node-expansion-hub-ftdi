@@ -19,19 +19,27 @@
         "conditions": [
           ['OS=="mac"', {
             'libraries': [
-                '-framework CoreFoundation',
-                '-framework IOKit'
+                '-l<(module_root_dir)/d2xx/darwin-osxuniversal/libftd2xx.a'
             ]
           }],
           ['OS=="win"', {
             'libraries': [
-                '-l<(module_root_dir)/d2xx/winamd64/ftd2xx.lib'
+                '-l<(module_root_dir)/d2xx/win-x64/ftd2xx.lib'
             ]
           }],
           ['OS=="linux"', {
-            'libraries': [
-                '<(module_root_dir)/d2xx/linuxamd64/libftd2xx.so'
-            ]
+            ['target_arch=="x64"', {
+              'libraries': [
+                '<(module_root_dir)/d2xx/linux-x64/libftd2xx.so'
+            ]}],
+            ['target_arch=="arm"', {
+              'libraries': [
+                '<(module_root_dir)/d2xx/linux-arm32/libftd2xx.so'
+            ]}],
+            ['target_arch=="arm64"', {
+              'libraries': [
+                '<(module_root_dir)/d2xx/linux-arm64/libftd2xx.so'
+            ]}],
           }]
         ],
       },
